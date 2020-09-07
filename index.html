@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            .data_field {
+                width: 100%;
+                height: 25%;
+            }
+        </style>
+        <script>
+            let indata = null;
+            let outdata = null;
+            let entries = [];
+
+            function convertData() {
+                let el = document.createElement('div');
+                el.innerHTML = indata.value;
+                console.dir(el);
+                
+                let rows = el.querySelectorAll("tr");
+                let outtext = "{| class=\"article-table\"\n|+Full Schedule\n";
+
+                for (let i=0; i<rows.length; i++) {
+                    outtext += "|" + rows[i].children[0].textContent + "\n";
+                    outtext += "|" + extractRunners(rows[i].children[1]) + "\n";
+                    outtext += "|" + extractRunners(rows[i].children[2]) + "\n";
+                    outtext += "|-\n";
+                }
+
+                outtext +="|}";
+
+                outdata.value = outtext;
+            }
+
+            function extractGame(el) {
+                let flat = "";
+                /*for (let i=0; i<el.children.length; i++) {
+                    flat += "[" + el.children[i].href + " " + el.children[i].textContent +"] ";
+                }*/
+                if (flat =="") {
+                    flat = el.textContent;
+                }
+                return flat;
+            }
+
+            function extractRunners(el) {
+                let flat = "";
+                for (let i=0; i<el.children.length; i++) {
+                    flat += "[" + el.children[i].href + " " + el.children[i].textContent +"] ";
+                }
+                if (flat =="") {
+                    flat = el.textContent;
+                }
+                return flat;
+            }
+
+            window.addEventListener('load', function() {
+                indata = document.getElementById("indata");
+                outdata = document.getElementById("outdata");
+
+                indata.addEventListener('input', function() {
+                    convertData();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>
+            GDQ Reddit table to Wiki table converter
+        </h1>
+        <p>
+            Instructions
+        </p>
+        <textarea class="data_field" id="indata" placeholder="Paste input data here..."></textarea>
+        <textarea class="data_field" id="outdata" placeholder="Output will appear here." readonly=true></textarea>
+    </body>
+</html>
