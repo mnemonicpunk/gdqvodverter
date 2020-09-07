@@ -72,7 +72,13 @@
             GDQ Reddit table to Wiki table converter
         </h1>
         <p>
-            Instructions
+            Instructions:<br>
+            1. On the Reddit VOD page, rightclick the table containing all the VODs.<br>
+            2. Click inspect.<br>
+            3. In the panel that opens up, make sure you are over the &lt;table&gt; element, if you use any other element this converter will output garbage.<br>
+            4. Rightclick the &lt;table&gt; element in the panel and select "edit as HTML", the element now turns into a bunch of HTML text.<br>
+            5. Copy this text, and paste it into the upper text field on this page.<br>
+            6. The lower field now contains the Wiki Markup for the table!<br>
         </p>
         <textarea class="data_field" id="indata" placeholder="Paste input data here..."></textarea>
         <textarea class="data_field" id="outdata" placeholder="Output will appear here." readonly=true></textarea>
